@@ -15,6 +15,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function(req, res, next){
   Bookmark.findById(req.params.id, function(err, bookmark) {
     if(err) return next(err);
+    console.log(bookmark);
     res.json(bookmark);
   });
 });
