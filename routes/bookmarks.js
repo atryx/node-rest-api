@@ -26,6 +26,7 @@ router.post('/', function(req, res, next) {
   Bookmark.create(req.body, function (err, bookmark) {
     console.log(bookmark);
     if (err) return next(err);
+    console.log(bookmark);
     res.json(bookmark);
   });
 });
