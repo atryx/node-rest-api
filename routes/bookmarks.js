@@ -1,50 +1,42 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Bookmark = require('../models/Bookmark.js');
+
+
+var bookmark = require('../controllers/BookmarkController.js');
 
 /* GET ALL BOOKMARKS */
 router.get('/', function (req, res, next) {
-  Bookmark.find(function(err, bookmarks) {
-    if(err) return next(err);
-    res.json(bookmarks);
-  });
+  bookmark.list(req, res);
 });
 
 /* GET SINGLE BOOKMARK BY ID */
-router.get('/:id', function(req, res, next){
-  Bookmark.findById(req.params.id, function(err, bookmark) {
-    if(err) return next(err);
-    console.log(bookmark);
-    res.json(bookmark);
-  });
+router.get('/show/:id', function(req, res, next){
+  bookmark.show(req, res);
+});
+
+router.get('/create', function(req, res, next){
+  bookmark.create(req, res);
 });
 
 
 /* SAVE BOOKMARK */
-router.post('/', function(req, res, next) {
-  Bookmark.create(req.body, function (err, bookmark) {
-    console.log(bookmark);
-    if (err) return next(err);
-    console.log(bookmark);
-    res.json(bookmark);
-  });
+router.post('/save', function(req, res, next) {
+  bookmark.save(req, res);
+});
+
+
+router.get('/edit/:id', function(req,res,next){
+  bookmark.edit(req, res);
 });
 
 /* UPDATE BOOKMARK */
-router.put('/:id', function(req, res, next) {
-  Bookmark.findByIdAndUpdate(req.params.id, req.body, function (err, bookmark) {
-    if (err) return next(err);
-    res.json(bookmark);
-  });
+router.post('/update/:id', function(req, res, next) {
+  bookmark.update(req, res);
 });
 
 /* DELETE BOOKMARK */
-router.delete('/:id', function(req, res, next) {
-  Bookmark.findByIdAndRemove(req.params.id, req.body, function (err, bookmark) {
-    if (err) return next(err);
-    res.json(bookmark);
-  });
+router.delete('/delete/:id', function(req, res, next) {
+  bookmark.delete(req, res);
 });
 
 module.exports = router;
