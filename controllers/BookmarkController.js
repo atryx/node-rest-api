@@ -36,12 +36,12 @@ bookmarkController.save = function(req, res) {
             res.render("../views/bookmarks/create");
         } else {
             console.log("Succesfully created bookmark");
-            res.render("../views/bookmarks/show/" + bookmark._id);
+            res.redirect("/bookmarks/show/" + bookmark._id);
         }
     });
 };
 
-bookmarkController.edit = function(res, req) {
+bookmarkController.edit = function(req, res) {
     Bookmark.findOne({_id: req.params.id}).exec(function(err, bookmark) {
         if (err) {
             console.log("Error: ", err);
