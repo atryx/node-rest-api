@@ -11,7 +11,7 @@ a {
 .container {
   padding: 20px;
   background-color: #efefef;
-  width: 400px;
+  width: 600px;
   border-radius: 6px;
 }
 .container h3 a {
@@ -28,7 +28,7 @@ a {
 }
 
 .container table {
-  width: 360px;
+  width: 600px;
 }
 
 .container table tr td {

@@ -70,16 +70,15 @@ bookmarkController.update = function(req, res) {
 };
 
 bookmarkController.delete = function(req, res) {
-    Bookmark.remove({
-        _id: req.params.id
-    }, function(err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Bookmark deleted!");
-            res.redirect("/bookmarks");
-        }
-    });
+  Bookmark.remove({_id: req.params.id}, function(err) {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      console.log("Bookmark deleted!");
+      res.redirect("/bookmarks");
+    }
+  });
 };
 
 module.exports = bookmarkController;

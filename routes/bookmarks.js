@@ -17,6 +17,6 @@ router.get('/edit/:id', bookmark.edit);
 
 router.post('/update/:id', bookmark.update);
 
-router.delete('/delete/:id',bookmark.delete);
+router.post('/delete/:id',bookmark.delete);
 
 module.exports = router;
