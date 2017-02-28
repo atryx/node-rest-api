@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Bookmark</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/bookmarks">Bokkmarks List</a></h3>
+      <h1>Edit Bookmark</h1>
+      <form action="/bookmarks/update/<%= bookmark._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td><input type="text" name="name" value="<%= bookmark.name %>" /></td>
+            </tr>
+            <tr>
+              <td>URL</td>
+              <td><input type="text" name="url" value="<%= bookmark.url %" /></td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td><input type="text" name="desc" value="<%= bookmark.desc %>" /></td>
+            </tr>
+            <tr>
+              <td>Updated at</td>
+              <td><input type="date" name="updated_at" value="<%= bookmark.updated_at %>" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

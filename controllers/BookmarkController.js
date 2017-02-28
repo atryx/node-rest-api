@@ -24,7 +24,7 @@ bookmarkController.show = function(req, res) {
 };
 
 bookmarkController.create = function(req, res) {
-    res.render("../view/bookmarks/create");
+    res.render("../views/bookmarks/create");
 };
 
 bookmarkController.save = function(req, res) {
@@ -33,10 +33,10 @@ bookmarkController.save = function(req, res) {
     bookmark.save(function(err) {
         if (err) {
             console.log("Error: ", err);
-            res.render("../view/bookmarks/create");
+            res.render("../views/bookmarks/create");
         } else {
             console.log("Succesfully created bookmark");
-            res.render("/bookmarks/show/" + bookmark._id);
+            res.render("../views/bookmarks/show/" + bookmark._id);
         }
     });
 };
