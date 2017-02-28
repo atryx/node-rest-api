@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookmark List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/bookmarks/create">Create Bookmark</a></h3>
+      <h1>Bookmarks List</h1>
+      <% if(bookmarks.length>0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Bookmark Name</th>
+            <th>URL</th>
+            <th>Description</th>
+            <th>Updated at</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<bookmarks.length;i++) { %>
+            <tr>
+              <td><a href="/bookmarks/show/<%= bookmarks[i]._id%>"><%= bookmarks[i].name%></a></td>
+              <td><%= bookmarks[i].url%></td>
+              <td><%= bookmarks[i].desc%></td>
+              <td><%= bookmarks[i].updated_at%></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No bookmarks found.</div>
+      <% } %>
+    </div>
+  </body>
+</html>
