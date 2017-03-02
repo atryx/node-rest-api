@@ -12,11 +12,11 @@ var users = require('./routes/users');
 
 var app = express();
 
-mongoose.Promise = global.Promise;
 
+var options = { promiseLibrary: require('bluebird') };
 var mongodbUri = 'mongodb://admin:admin@ds143449.mlab.com:43449/fem';
 // Configure conenction URL (only needs to happen once per app)
-mongoose.connect(mongodbUri)
+mongoose.connect(mongodbUri, options)
         .then(() =>  console.log('connection succesful'))
         .catch((err) => console.error(err));
 
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({type:'appplication/vnd.api+json'}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'stylesheets')));
 
 app.use('/', index);
 app.use('/users', users);
@@ -41,7 +41,6 @@ app.use('/bookmarks', bookmarks);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
-  console.log('this is an error');
   err.status = 404;
   next(err);
 });
