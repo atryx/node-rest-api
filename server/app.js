@@ -1,14 +1,14 @@
 const express      = require('express');
-const logger       = require('morgan');
 const path         = require('path');
 const favicon      = require('serve-favicon');
+const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const mongoose     = require('mongoose');
 
 
 const index = require('./routes/index');
-const users = require('./routes/users');
+// const users = require('./routes/users');
 const bookmarks = require('./routes/bookmarks.js');
 
 const app = express();
@@ -31,12 +31,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({type:'appplication/vnd.api+json'}));
 app.use(cookieParser());
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(express.static(path.join(__dirname, 'stylesheets')));
 
 app.use('/', index);
-app.use('/users', users);
+// app.use('/users', users);
 app.use('/bookmarks', bookmarks);
 
 
@@ -47,6 +47,18 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// // development error handler
+// // will print stacktrace
+// if (app.get('env') === 'development') {
+//   app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//       message: err.message,
+//       error: err
+//     });
+//   });
+// }
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -56,10 +68,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
 module.exports = app;
