@@ -8,6 +8,7 @@ bookmarkController.list = function(req, res) {
         if (err) {
             console.log("Error: ", err);
         } else {
+          console.log(req);
             res.render("../views/bookmarks/index", {bookmarks: bookmarks});
         }
     });
