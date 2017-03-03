@@ -36,7 +36,6 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(express.static(path.join(__dirname, 'stylesheets')));
 
 app.use('/', index);
-// app.use('/users', users);
 app.use('/bookmarks', bookmarks);
 
 
@@ -46,18 +45,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
-// // development error handler
-// // will print stacktrace
-// if (app.get('env') === 'development') {
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
 
 // error handler
 app.use(function(err, req, res, next) {

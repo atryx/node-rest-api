@@ -5,18 +5,19 @@ var router = express.Router();
 var bookmark = require('../controllers/BookmarkController.js');
 
 
-router.get('/',  bookmark.list);
+router.get('/',  function(req, res) {
+  bookmark.list(req, res);
+});
+router.get('/:id', bookmark.read);
 
-router.get('/show/:id', bookmark.show);
-
-router.get('/create', bookmark.create);
-
-router.post('/save',bookmark.save);
-
-router.get('/edit/:id', bookmark.edit);
-
-router.post('/update/:id', bookmark.update);
-
-router.post('/delete/:id',bookmark.delete);
+router.post('/', function(req, res, next){
+  bookmark.create(req, res);
+});
+router.put('/:id',function(req, res, next){
+  bookmark.update(req, res);
+});
+router.delete('/:id',function(req, res, next) {
+  bookmark.delete(req, res);
+});
 
 module.exports = router;

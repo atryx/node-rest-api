@@ -8,46 +8,31 @@ bookmarkController.list = function(req, res) {
         if (err) {
             console.log("Error: ", err);
         } else {
-          console.log(req);
-            res.render("../views/bookmarks/index", {bookmarks: bookmarks});
+            res.json(bookmarks);
         }
     });
 };
 
-bookmarkController.show = function(req, res) {
+bookmarkController.read = function(req, res) {
     Bookmark.findOne({_id: req.params.id}).exec(function(err, bookmark) {
         if (err) {
             console.log("Error: ", err);
         } else {
-            res.render("../views/bookmarks/show", {bookmark: bookmark});
+            res.json(bookmark);
         }
     });
 };
 
 bookmarkController.create = function(req, res) {
-    res.render("../views/bookmarks/create");
-};
-
-bookmarkController.save = function(req, res) {
     var bookmark = new Bookmark(req.body);
 
     bookmark.save(function(err) {
         if (err) {
             console.log("Error: ", err);
-            res.render("../views/bookmarks/create");
+            rconsole.log("failed to save bookmark");
         } else {
             console.log("Succesfully created bookmark");
-            res.redirect("/bookmarks/show/" + bookmark._id);
-        }
-    });
-};
-
-bookmarkController.edit = function(req, res) {
-    Bookmark.findOne({_id: req.params.id}).exec(function(err, bookmark) {
-        if (err) {
-            console.log("Error: ", err);
-        } else {
-            res.render("../views/bookmarks/edit", {bookmark: bookmark});
+            res.json(bookmark);
         }
     });
 };
@@ -64,9 +49,9 @@ bookmarkController.update = function(req, res) {
     }, function(err, bookmark) {
         if (err) {
             console.log(err);
-            res.render("../views/bookmarks/edit", {bookmark: req.body});
+            console.log("failed to update bookmark");
         }
-        res.redirect("/bookmarks/show/" + bookmark._id);
+        res.json(bookmark);
     });
 };
 
