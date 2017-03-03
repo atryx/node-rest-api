@@ -62,7 +62,6 @@ bookmarkController.delete = function(req, res) {
     }
     else {
       console.log("Bookmark deleted!");
-      res.redirect("/bookmarks");
     }
   });
 };
